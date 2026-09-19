@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Notes | UniSphere</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Karla:wght@400;700&display=swap">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="top-bar">
+    <img class="logo" src="images/unisphere_logo.png" alt="UniSphere logo" width="32" height="32">
+    <input type="search" placeholder="Search.." aria-label="Search UniSphere">
+    <img class="profile-pic" src="images/profile.jpg" alt="Your profile" width="32" height="32">
+  </header>
+
+  <div class="page-wrapper">
+
+    <!-- The navigation is built by script.js (see NAV_SECTIONS) so it only lives in one place -->
+    <aside class="sidebar" id="sidebar"></aside>
+
+    <main class="main-content" id="main">
+      <div class="page-panel">
+        <h1>My Notes</h1>
+
+        <form id="noteForm" class="add-form" novalidate>
+          <div class="field field-wide">
+            <label for="noteInput">Note</label>
+            <input type="text" id="noteInput" name="text" placeholder="Write a note" autocomplete="off">
+          </div>
+          <button class="add-button" type="submit">Add note</button>
+          <p class="form-error" role="alert" hidden></p>
+        </form>
+
+        <ul id="noteList" class="note-list"></ul>
+
+        <div id="noteEmpty" class="empty-state" hidden>
+          <pre aria-hidden="true">  o
+ /|\
+ / \</pre>
+          <p>No notes yet. Add one above.</p>
+        </div>
+      </div>
+    </main>
+
+  </div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

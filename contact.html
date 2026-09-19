@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacts | UniSphere</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Karla:wght@400;700&display=swap">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="top-bar">
+    <img class="logo" src="images/unisphere_logo.png" alt="UniSphere logo" width="32" height="32">
+    <input type="search" placeholder="Search.." aria-label="Search UniSphere">
+    <img class="profile-pic" src="images/profile.jpg" alt="Your profile" width="32" height="32">
+  </header>
+
+  <div class="page-wrapper">
+
+    <!-- The navigation is built by script.js (see NAV_SECTIONS) so it only lives in one place -->
+    <aside class="sidebar" id="sidebar"></aside>
+
+    <main class="main-content" id="main">
+      <div class="page-panel">
+        <h1>My Contacts</h1>
+
+        <ul class="contact-list">
+          <li class="contact"><strong>Maya</strong><span>Subject: Math</span></li>
+          <li class="contact"><strong>Diego</strong><span>Subject: Science</span></li>
+          <li class="contact"><strong>Priya</strong><span>Subject: English</span></li>
+          <li class="contact"><strong>Sam</strong><span>Subject: History</span></li>
+          <li class="contact"><strong>Elle</strong><span>Subject: Art</span></li>
+          <li class="contact"><strong>Noah</strong><span>Subject: Music</span></li>
+        </ul>
+      </div>
+    </main>
+
+  </div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home | UniSphere</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Karla:wght@400;700&display=swap">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="top-bar">
+    <img class="logo" src="images/unisphere_logo.png" alt="UniSphere logo" width="32" height="32">
+    <input type="search" placeholder="Search.." aria-label="Search UniSphere">
+    <img class="profile-pic" src="images/profile.jpg" alt="Your profile" width="32" height="32">
+  </header>
+
+  <div class="page-wrapper">
+
+    <!-- The navigation is built by script.js (see NAV_SECTIONS) so it only lives in one place -->
+    <aside class="sidebar" id="sidebar"></aside>
+
+    <main class="main-content" id="main">
+
+      <div class="tray-wrap">
+        <div class="tray" id="tray">
+          <button type="button" class="create-card">
+            <span class="create-top" aria-hidden="true">+</span>
+            <span class="create-label">Create story</span>
+          </button>
+          <!-- Story cards are added by script.js (see STORIES) -->
+        </div>
+      </div>
+
+      <div class="intro-block">
+        <h1>Welcome to UniSphere</h1>
+        <p class="intro">Your gateway to a world of knowledge and discovery. Explore our vast collection of resources, connect with experts, and embark on a journey of learning like never before.</p>
+      </div>
+
+      <!-- Posts are added by script.js (see POSTS), using the template below -->
+      <div class="feed" id="feed"></div>
+
+      <template id="post-template">
+        <article class="post">
+          <div class="post-header">
+            <img class="post-avatar" src="images/profile.jpg" alt="" width="40" height="40">
+            <div class="post-meta">
+              <span class="post-name"></span>
+              <time class="timestamp"></time>
+            </div>
+          </div>
+          <p class="post-text"></p>
+          <img class="post-image" alt="" loading="lazy">
+
+          <div class="like-section">
+            <button type="button" class="like-btn" aria-pressed="false">
+              <span class="like-icon" aria-hidden="true">👍</span>
+              <span class="like-text">Like</span>
+            </button>
+            <span class="like-count"></span>
+          </div>
+
+          <div class="comments-section">
+            <div class="comment-list"></div>
+            <form class="comment-form">
+              <input type="text" class="comment-input" placeholder="Write a comment..." aria-label="Write a comment" required>
+              <button type="submit">Post</button>
+            </form>
+          </div>
+        </article>
+      </template>
+
+    </main>
+
+  </div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

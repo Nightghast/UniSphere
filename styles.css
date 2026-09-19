@@ -1,0 +1,791 @@
+/* =========================================================
+   UniSphere - paper-and-ink theme
+   Inspired by nothingonpurpose.com: a handwritten look on
+   plain paper, ink outlines, dry humour. Change the look
+   from the variables below.
+   ========================================================= */
+
+/* ===== Variables ===== */
+:root {
+  --bg: #eeeeea;          /* the desk */
+  --card: #ffffff;        /* the paper */
+  --ink: #1b1b1f;
+  --ink-soft: #5b5b66;
+  --pen: #2743c9;         /* ballpoint blue: links, focus, unseen stories */
+  --highlight: #ffe45c;   /* marker: current page */
+  --sticky: #fff2a8;      /* notes */
+  --dash: #b9b9b0;        /* receipt-style dividers */
+
+  --ok: #2f7d4b;
+  --ok-bg: #e4f3e8;
+  --soon: #8a6100;
+  --soon-bg: #fff4c7;
+  --urgent: #b42323;
+  --urgent-bg: #fde6e3;
+
+  --ring-seen: #c9c9c2;
+  --radius: 12px;
+  --border: 2px solid var(--ink);
+
+  --font-body: 'Karla', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-hand: 'Caveat', 'Segoe Print', 'Bradley Hand', cursive;
+}
+
+/* ===== Reset & base ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding: 24px 0 48px;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.55;
+}
+
+h1,
+h2 {
+  margin: 0;
+  font-family: var(--font-hand);
+  line-height: 1.1;
+}
+
+h1 {
+  margin-bottom: 18px;
+  font-size: 3.2rem;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 1.7rem;
+  font-weight: 700;
+}
+
+a {
+  color: var(--pen);
+}
+
+:focus-visible {
+  outline: 3px solid var(--pen);
+  outline-offset: 2px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: -60px;
+  z-index: 10;
+  padding: 8px 14px;
+  background: var(--ink);
+  color: var(--card);
+  border-radius: 8px;
+}
+
+.skip-link:focus {
+  top: 12px;
+}
+
+/* ===== Top bar (logo, search, profile) ===== */
+.top-bar {
+  max-width: 1000px;
+  margin: 0 auto 20px;
+  padding: 0 14px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.top-bar img {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.top-bar .profile-pic {
+  border: var(--border);
+}
+
+.top-bar input {
+  flex: 1;
+  padding: 8px 16px;
+  border: var(--border);
+  border-radius: 999px;
+  background: var(--card);
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.95rem;
+}
+
+/* ===== Page layout (sidebar + main content) ===== */
+.page-wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 14px;
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.sidebar {
+  flex: 0 0 220px;
+  position: sticky;
+  top: 24px;
+  padding: 18px;
+  background: var(--card);
+  border: var(--border);
+  border-radius: var(--radius);
+}
+
+.main-content {
+  flex: 1;
+  min-width: 0;
+}
+
+@media (max-width: 720px) {
+  .page-wrapper {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    flex: 1 1 auto;
+    width: 100%;
+    position: static;
+  }
+
+  h1 {
+    font-size: 2.6rem;
+  }
+}
+
+/* ===== Sidebar navigation ===== */
+.sidebar nav + nav {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 2px dashed var(--dash);
+}
+
+.sidebar h2 {
+  margin-bottom: 6px;
+  color: var(--ink-soft);
+  font-size: 1.5rem;
+}
+
+.sidebar ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sidebar li + li {
+  margin-top: 2px;
+}
+
+.sidebar a {
+  display: block;
+  padding: 5px 8px;
+  border-radius: 6px;
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.sidebar a:hover {
+  text-decoration: underline dashed;
+  text-underline-offset: 4px;
+}
+
+.sidebar a[aria-current='page'] {
+  background: var(--highlight);
+  font-weight: 700;
+}
+
+.sidebar .unihub-link {
+  color: var(--pen);
+  font-weight: 700;
+}
+
+/* ===== Page panel (notes, schedule, deadlines, contacts) ===== */
+.page-panel {
+  padding: 26px 28px 30px;
+  background: var(--card);
+  border: var(--border);
+  border-radius: var(--radius);
+}
+
+/* ===== Forms ===== */
+.add-form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 14px;
+  margin-bottom: 28px;
+  padding-bottom: 26px;
+  border-bottom: 2px dashed var(--dash);
+}
+
+.field {
+  display: flex;
+  flex: 1 1 150px;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.field-wide {
+  flex: 2 1 240px;
+}
+
+.field label {
+  font-family: var(--font-hand);
+  font-size: 1.4rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.field input,
+.field select {
+  width: 100%;
+  padding: 9px 12px;
+  border: var(--border);
+  border-radius: 8px;
+  background: var(--card);
+  color: var(--ink);
+  font: inherit;
+  font-size: 1rem;
+}
+
+.add-button {
+  padding: 8px 22px 6px;
+  border: var(--border);
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--card);
+  font-family: var(--font-hand);
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 var(--pen);
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.add-button:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--pen);
+}
+
+.add-button:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--pen);
+}
+
+.form-error {
+  flex: 1 1 100%;
+  margin: 0;
+  color: var(--urgent);
+  font-weight: 700;
+}
+
+/* ===== Empty state ===== */
+.empty-state {
+  padding: 24px 0 8px;
+  text-align: center;
+  color: var(--ink-soft);
+}
+
+.empty-state pre {
+  margin: 0 0 6px;
+  font-size: 1.3rem;
+  line-height: 1.1;
+}
+
+.empty-state p {
+  margin: 0;
+  font-family: var(--font-hand);
+  font-size: 1.6rem;
+}
+
+/* ===== Delete button (shared) ===== */
+.delete-button {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ink-soft);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background: rgba(0, 0, 0, 0.08);
+  color: var(--urgent);
+}
+
+/* ===== Notes ===== */
+.note-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.note {
+  position: relative;
+  min-height: 120px;
+  padding: 34px 20px 20px;
+  background: var(--sticky);
+  border: var(--border);
+  border-radius: 4px;
+  overflow-wrap: anywhere;
+  transition: transform 0.15s ease;
+}
+
+.note:nth-child(odd) {
+  transform: rotate(-1deg);
+}
+
+.note:nth-child(even) {
+  transform: rotate(1deg);
+}
+
+.note:hover {
+  transform: rotate(0) translateY(-3px);
+}
+
+.note-text {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+/* ===== Schedule ===== */
+.schedule-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.schedule-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 120px 1fr auto;
+  align-items: baseline;
+  gap: 4px 14px;
+  padding: 12px 52px 12px 16px;
+  background: var(--card);
+}
+
+.schedule-item + .schedule-item {
+  border-top: 2px dashed var(--dash);
+}
+
+.slot-day {
+  color: var(--pen);
+  font-family: var(--font-hand);
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.slot-time {
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
+@media (max-width: 520px) {
+  .schedule-item {
+    grid-template-columns: 1fr auto;
+  }
+
+  .slot-day {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ===== Deadlines ===== */
+.deadline-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 14px;
+}
+
+.deadline {
+  --status: var(--ink-soft);
+  --status-bg: var(--card);
+  position: relative;
+  display: grid;
+  gap: 2px;
+  padding: 14px 52px 14px 18px;
+  background: var(--status-bg);
+  border: var(--border);
+  border-left: 10px solid var(--status);
+  border-radius: 6px;
+}
+
+.deadline[data-urgency='far'] {
+  --status: var(--ok);
+  --status-bg: var(--ok-bg);
+}
+
+.deadline[data-urgency='soon'] {
+  --status: var(--soon);
+  --status-bg: var(--soon-bg);
+}
+
+.deadline[data-urgency='urgent'] {
+  --status: var(--urgent);
+  --status-bg: var(--urgent-bg);
+}
+
+.deadline-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.deadline-date {
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+}
+
+/* Text label as well as colour, so urgency isn't shown by colour alone */
+.deadline-when {
+  color: var(--status);
+  font-family: var(--font-hand);
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+/* ===== Contacts ===== */
+.contact-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.contact {
+  padding: 18px 20px;
+  background: var(--card);
+  border: var(--border);
+  border-radius: 8px;
+}
+
+.contact strong {
+  display: block;
+  font-family: var(--font-hand);
+  font-size: 1.9rem;
+  line-height: 1.1;
+}
+
+.contact span {
+  color: var(--ink-soft);
+}
+
+/* ===== Home: story tray ===== */
+.tray-wrap {
+  padding: 14px 0 14px 14px;
+  background: var(--card);
+  border: var(--border);
+  border-radius: var(--radius);
+}
+
+.tray {
+  display: flex;
+  gap: 8px;
+  padding: 0 14px 4px 0;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+}
+
+.story-card,
+.create-card {
+  flex: 0 0 auto;
+  width: 108px;
+  height: 190px;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  font: inherit;
+}
+
+.story-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0;
+  border: 0;
+  background: var(--story-bg, #444);
+  color: #fff;
+  text-align: left;
+}
+
+/* Darkens the bottom so the caption stays readable */
+.story-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.55));
+}
+
+.story-caption {
+  position: relative;
+  z-index: 1;
+  padding: 8px;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.story-avatar {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 2;
+  width: 34px;
+  height: 34px;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--pen);
+}
+
+.story-card.seen .story-avatar {
+  background: var(--ring-seen);
+}
+
+.story-avatar-inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--card);
+  border-radius: 50%;
+  background: #444;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.create-card {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  border: 2px dashed var(--ink-soft);
+  background: var(--card);
+  color: var(--ink);
+}
+
+.create-top {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-hand);
+  font-size: 3.4rem;
+  line-height: 1;
+}
+
+.create-label {
+  padding: 0 4px 14px;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+/* ===== Home: intro and feed ===== */
+.intro-block {
+  margin: 24px 0 8px;
+}
+
+.intro {
+  max-width: 62ch;
+  margin: 0;
+}
+
+.feed {
+  margin-top: 20px;
+}
+
+.post {
+  margin-bottom: 20px;
+  padding: 16px;
+  background: var(--card);
+  border: var(--border);
+  border-radius: var(--radius);
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.post-avatar {
+  width: 40px;
+  height: 40px;
+  border: var(--border);
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.post-meta {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.post-name {
+  font-weight: 700;
+}
+
+.timestamp {
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+}
+
+.post-text {
+  margin: 0 0 10px;
+}
+
+.post-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-bottom: 8px;
+  border: var(--border);
+  border-radius: 8px;
+}
+
+/* ===== Like button ===== */
+.like-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  border-top: 2px dashed var(--dash);
+}
+
+.like-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border: 0;
+  border-radius: 6px;
+  background: none;
+  color: var(--ink-soft);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.like-btn:hover {
+  background: var(--bg);
+}
+
+.like-btn.liked {
+  color: var(--pen);
+}
+
+.like-count {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+}
+
+/* ===== Comments ===== */
+.comments-section {
+  padding-top: 10px;
+  border-top: 2px dashed var(--dash);
+}
+
+.comment {
+  margin-bottom: 8px;
+}
+
+.comment-bubble {
+  display: inline-block;
+  padding: 7px 14px;
+  border-radius: 14px;
+  background: var(--bg);
+  font-size: 0.95rem;
+  overflow-wrap: anywhere;
+}
+
+.comment-name {
+  margin-right: 6px;
+  font-weight: 700;
+}
+
+.comment-form {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.comment-form input {
+  flex: 1;
+  min-width: 0;
+  padding: 7px 14px;
+  border: var(--border);
+  border-radius: 999px;
+  background: var(--card);
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.95rem;
+}
+
+.comment-form button {
+  padding: 7px 18px;
+  border: var(--border);
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--card);
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* ===== Motion preferences ===== */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
